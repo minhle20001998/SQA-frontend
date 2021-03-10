@@ -8,7 +8,7 @@ import ScrollToTop from "../ScrollToTop/ScrollToTop";
 import './Journey.css';
 import user_image from "../../images/user.png";
 import { BrowserRouter as Router, Route, withRouter, NavLink } from 'react-router-dom'
-
+import { Helmet } from "react-helmet";
 class Journey extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +17,8 @@ class Journey extends Component {
             content: "",
             title: "",
             address: "",
-            image_link: ""
+            image_link: "",
+            theposition: window.pageYOffset
         }
         this.handleContentInput = this.handleContentInput.bind(this);
         this.handleTitleInput = this.handleTitleInput.bind(this);
@@ -28,7 +29,27 @@ class Journey extends Component {
         this.toLoginpage = this.toLoginpage.bind(this);
     }
 
+    listenToScroll = () => {
+        const winScroll =
+            document.body.scrollTop || document.documentElement.scrollTop
+
+        const height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight
+
+        const scrolled = winScroll / height
+
+        this.setState({
+            theposition: scrolled,
+        })
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.listenToScroll)
+    }
+
     async componentDidMount() {
+        window.addEventListener('scroll', this.listenToScroll)
         this.getBroads();
     }
 
@@ -112,58 +133,63 @@ class Journey extends Component {
 
 
     render() {
-        const { broads } = this.state;
+        const { broads, theposition } = this.state;
         const { logo, history, isLogin } = this.props;
-
+        console.log(theposition)
         return <div className="journey">
+            <Helmet>
+                <title>Journey</title>
+            </Helmet>
             <ScrollToTop />
             <ScrollUpButton />
             <Navbar current="homepage" logo={logo} isLogin={isLogin} current="journey experiences" />
-            <div className="head-div">
-                <header onClick={this.toLoginpage}>
-                    <div id="title">
-                        <p id="heading-p">Create a post</p>
-                    </div>
-                    <div id="post-body">
-                        <div className="post-input">
-                            <button className="post-button" onClick={this.handlePost}>Post</button>
-                            <i className="fas fa-user"></i>
-                            <textarea className="experience-input" placeholder="What's on your mind ?" onInput={this.handleContentInput} />
-                        </div>
-                        <div className="title-input board-input">
-                            <i className="fas fa-arrow-right"></i>
-                            <input className="experience-input" type="text" placeholder="Set your title" onInput={this.handleTitleInput} />
-                        </div>
-                        <div className="image-input board-input">
-                            <i className="far fa-image"></i>
-                            <input className="experience-input" type="text" placeholder="Put your image link here" onInput={this.handleImageLinkInput} />
-                        </div>
-                        <div className="address-input board-input">
-                            <i className="fas fa-map-marker-alt"></i>
-                            <input className="experience-input" type="text" placeholder="Where are you ?" onInput={this.handleAddressInput} />
-                        </div>
-                    </div>
-                </header>
-            </div>
+            <main>
+                {broads ?
+                    <section id="broad-news">
+                        {broads.map((broad, index) => {
+                            return <div className="broad" key={index}>
+                                <div>
+                                    <img className="user-avatar" src={user_image} alt="user-avatar" />
+                                    <p className="user-name">{`Traveller #${index}`}</p>
+                                </div>
+                                <div className="broad-body">
+                                    <p className="title">{broad.title}</p>
+                                    <p className="address"># {broad.address}</p>
+                                    <p className="content">{broad.content}</p>
+                                    <img className="tag-image" src={broad.image_link} alt="tag-image" />
+                                </div>
+                            </div>
+                        })}
+                    </section>
+                    : <></>}
 
-            {broads ?
-                <section id="broad-news">
-                    {broads.map((broad, index) => {
-                        return <div className="broad" key={index}>
-                            <div>
-                                <img className="user-avatar" src={user_image} alt="user-avatar" />
-                                <p className="user-name">{`Traveller #${index}`}</p>
+                <aside className="head-div">
+                    <header onClick={this.toLoginpage} className={(parseFloat(theposition) > 0.05) ? "fixed" : ""}>
+                        <div id="title">
+                            <p id="heading-p">Create a post</p>
+                        </div>
+                        <div id="post-body">
+                            <div className="post-input">
+                                <button className="post-button" onClick={this.handlePost}>Post</button>
+                                <i className="fas fa-user"></i>
+                                <textarea className="experience-input" placeholder="What's on your mind ?" onInput={this.handleContentInput} />
                             </div>
-                            <div className="broad-body">
-                                <p className="title">{broad.title}</p>
-                                <p className="address"># {broad.address}</p>
-                                <p className="content">{broad.content}</p>
-                                <img className="tag-image" src={broad.image_link} alt="tag-image" />
+                            <div className="title-input board-input">
+                                <i className="fas fa-arrow-right"></i>
+                                <input className="experience-input" type="text" placeholder="Set your title" onInput={this.handleTitleInput} />
+                            </div>
+                            <div className="image-input board-input">
+                                <i className="far fa-image"></i>
+                                <input className="experience-input" type="text" placeholder="Put your image link here" onInput={this.handleImageLinkInput} />
+                            </div>
+                            <div className="address-input board-input">
+                                <i className="fas fa-map-marker-alt"></i>
+                                <input className="experience-input" type="text" placeholder="Where are you ?" onInput={this.handleAddressInput} />
                             </div>
                         </div>
-                    })}
-                </section>
-                : <></>}
+                    </header>
+                </aside>
+            </main>
             <Footer logo={logo}></Footer>
         </div>
     }

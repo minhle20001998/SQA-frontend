@@ -6,6 +6,7 @@ import loginImage from '../Login/assets/images/login.jpg';
 import Footer from '../Footer/Footer';
 import { BrowserRouter as Router, Route, withRouter, NavLink } from 'react-router-dom';
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
+import { Helmet } from "react-helmet";
 
 class Register extends Component {
     constructor(props) {
@@ -90,7 +91,10 @@ class Register extends Component {
         const { status } = this.state;
         const { logo } = this.props;
         return <div className="register">
-            <ScrollToTop/>
+            <Helmet>
+                <title>Register</title>
+            </Helmet>
+            <ScrollToTop />
             <ScrollUpButton />
             <Navbar logo={logo} />
             <main className="d-flex align-items-center py-3 py-md-0">
@@ -128,7 +132,7 @@ class Register extends Component {
                                             <label htmlFor="address" className="sr-only">Address</label>
                                             <input type="text" name="address" id="address" className="form-control" placeholder="Address" onInput={this.handleAddressInput} required="required" />
                                         </div>
-                                        <input type="submit" name="login" id="login" className="btn btn-block login-btn mb-4" value="Register"  />
+                                        <input type="submit" name="login" id="login" className="btn btn-block login-btn mb-4" value="Register" />
                                     </form>
                                     <p className="login-card-footer-text">Already have an account ? <a href="/login" className="text-reset"><ins>Login here</ins></a></p>
                                     <nav className="login-card-footer-nav">

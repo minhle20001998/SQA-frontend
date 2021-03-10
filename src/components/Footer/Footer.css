@@ -31,7 +31,7 @@ footer .footer-bar .community {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px
+  padding: 0 30px;
 }
 footer .footer-bar .community > a > i {
   font-size: 30px;
@@ -40,13 +40,12 @@ footer .footer-bar .community > a > i {
 }
 
 .copyright > p {
-  margin-bottom: 20px;
 }
 .copyright {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
   width: 100%;
 }
 
@@ -58,7 +57,7 @@ footer .footer-bar .community > a > i {
     padding: 20px 40px !important;
   }
 
-  footer .footer-bar .homestay-logo{
+  footer .footer-bar .homestay-logo {
     display: flex;
     justify-content: center;
   }

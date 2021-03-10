@@ -13,7 +13,6 @@ class Footer extends Component {
                     <div className="homestay-logo">
                         <img src={logo} alt="logo" className="logo" />
                     </div>
-                    <p className="address">#ADDRESS </p>
                     <div className="community">
                         <a href="https://www.youtube.com/">
                             <i className="fab fa-youtube"></i>
@@ -27,8 +26,8 @@ class Footer extends Component {
                     </div>
                 </div>
                 <div className="copyright">
-                    <p>2021 Copyright information goes here.</p>
                     <p>Designed by SQA team</p>
+                    <p>2021 Copyright information goes here.</p>
                 </div>
             </Router>
         </ footer>

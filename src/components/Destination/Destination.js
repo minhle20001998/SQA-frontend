@@ -4,8 +4,9 @@ import Slideshow from '../Slideshow/Slideshow';
 import Navbar from '../Nav/Navbar';
 import Footer from '../Footer/Footer'
 import ScrollUpButton from "react-scroll-up-button";
-import ScrollToTop from "../ScrollToTop/ScrollToTop"
-import './Destination.css'
+import ScrollToTop from "../ScrollToTop/ScrollToTop";
+import './Destination.css';
+import { Helmet } from "react-helmet";
 class Destination extends Component {
 
     constructor(props) {
@@ -96,9 +97,12 @@ class Destination extends Component {
         const { showList, location } = this.state;
         const { logo, history, isLogin } = this.props;
         return <div className="destination">
+            <Helmet>
+                <title>Destination</title>
+            </Helmet>
             <ScrollToTop />
             <ScrollUpButton />
-            <Navbar current="destination" logo={logo} isLogin={isLogin}/>
+            <Navbar current="destination" logo={logo} isLogin={isLogin} />
             <Slideshow >
                 <div className="main-content">
                     <div className="meta-text">

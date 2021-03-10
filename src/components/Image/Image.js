@@ -6,6 +6,8 @@ import Footer from '../Footer/Footer';
 import ScrollUpButton from "react-scroll-up-button";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
 import './Image.css';
+import { Helmet } from "react-helmet";
+
 function importAll(r) {
     return r.keys().map(r);
 }
@@ -21,6 +23,9 @@ class Image extends Component {
         const { logo, history, isLogin } = this.props;
 
         return <div className="image">
+            <Helmet>
+                <title>Image</title>
+            </Helmet>
             <ScrollToTop />
             <ScrollUpButton />
             <Navbar current="homepage" logo={logo} isLogin={isLogin} current="image" />

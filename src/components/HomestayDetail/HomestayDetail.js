@@ -15,7 +15,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import moneyFormatter from "../Functions/moneyFormatter"
-
+import { Helmet } from "react-helmet";
 class HomestayDetail extends Component {
 
     constructor(props) {
@@ -146,6 +146,9 @@ class HomestayDetail extends Component {
         const { isLogin, logo } = this.props;
         const { homestay, reviews, dialogOpen, err, value } = this.state;
         return <div className="homestay_detail">
+            <Helmet>
+                <title>Detail</title>
+            </Helmet>
             {(homestay && reviews) ? <Dialog open={dialogOpen} onClose={this.handleEditClose} id="bill" >
                 <DialogTitle id="form-dialog-title">Edit Homestays</DialogTitle>
                 <p style={{ color: "red", textAlign: "center" }}>{err}</p>

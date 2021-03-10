@@ -8,6 +8,7 @@ import Footer from '../Footer/Footer';
 import loginImage from './assets/images/login.jpg';
 import './assets/css/login.css';
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
+import { Helmet } from "react-helmet";
 
 class Login extends Component {
     constructor(props) {
@@ -84,6 +85,9 @@ class Login extends Component {
         const { status } = this.state;
         const { logo } = this.props;
         return <div className="login">
+            <Helmet>
+                <title>Login</title>
+            </Helmet>
             <ScrollToTop />
             <ScrollUpButton />
             <Navbar logo={logo} />

@@ -8,7 +8,7 @@ import "./HomestayBooking.css"
 import ScrollUpButton from "react-scroll-up-button";
 import ScrollToTop from "../ScrollToTop/ScrollToTop"
 import moneyFormatter from "../Functions/moneyFormatter"
-
+import { Helmet } from "react-helmet";
 class HomestayBooking extends Component {
     constructor(props) {
         super(props);
@@ -124,6 +124,9 @@ class HomestayBooking extends Component {
         const { slideImages, homestays, steps } = this.state;
         const { isLogin, logo } = this.props;
         return <div className="homestay-booking">
+            <Helmet>
+                <title>Booking</title>
+            </Helmet>
             <ScrollToTop />
             <ScrollUpButton />
             <Navbar current="homestay booking" logo={logo} isLogin={isLogin} />
