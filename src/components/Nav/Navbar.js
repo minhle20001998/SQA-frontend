@@ -45,33 +45,34 @@ class Navbar extends Component {
     render() {
         const { username } = this.state;
         const { isLogin, logo, current } = this.props;
-        return <nav className="client-navbar">
-            <Link className="homestay-logo" to="/">
-                <img src={logo} alt="logo" className="logo" />
-            </Link>
-            <div className="links">
-                <ul>
-                    {links.map(link =>
-                        <li key={link.name + "-li"}>
-                            <Link className={(link.name === current) ? "underline" : ""} id={(link.name).replace(" ", "-") + "-link"} to={link.link}>{link.name}</Link>
-                        </li>)
-                    }
-                </ul>
-            </div>
-            {isLogin ? <div className="user-area">
-                <Link to="/history"><i className="fas fa-history"></i></Link>
-                <abbr title={username} onClick={() => {
-                    this.deleteCookie('uid');
-                    this.deleteCookie('username');
-                    window.location.reload();
-                }}><i className="fas fa-sign-out-alt"></i></abbr>
-            </div> : <div className="user-area">
-                <Link to="/login">Login</Link>
-                <span>|</span>
-                <Link to="/register">Register</Link>
-            </div>}
-
-        </nav>
+        return <div className="nav-bar">
+            <nav className="client-navbar">
+                <Link className="homestay-logo" to="/">
+                    <img src={logo} alt="logo" className="logo" />
+                </Link>
+                <div className="links">
+                    <ul>
+                        {links.map(link =>
+                            <li key={link.name + "-li"}>
+                                <Link className={(link.name === current) ? "underline" : ""} id={(link.name).replace(" ", "-") + "-link"} to={link.link}>{link.name}</Link>
+                            </li>)
+                        }
+                    </ul>
+                </div>
+                {isLogin ? <div className="user-area">
+                    <Link to="/history"><i className="fas fa-history"></i></Link>
+                    <abbr title={username} onClick={() => {
+                        this.deleteCookie('uid');
+                        this.deleteCookie('username');
+                        window.location.reload();
+                    }}><i className="fas fa-sign-out-alt"></i></abbr>
+                </div> : <div className="user-area">
+                    <Link to="/login">Login</Link>
+                    <span>|</span>
+                    <Link to="/register">Register</Link>
+                </div>}
+            </nav>
+        </div>
     }
 }
 

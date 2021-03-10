@@ -18,7 +18,6 @@ class Journey extends Component {
             title: "",
             address: "",
             image_link: "",
-            theposition: window.pageYOffset
         }
         this.handleContentInput = this.handleContentInput.bind(this);
         this.handleTitleInput = this.handleTitleInput.bind(this);
@@ -27,21 +26,6 @@ class Journey extends Component {
         this.handlePost = this.handlePost.bind(this);
         this.getBroads = this.getBroads.bind(this);
         this.toLoginpage = this.toLoginpage.bind(this);
-    }
-
-    listenToScroll = () => {
-        const winScroll =
-            document.body.scrollTop || document.documentElement.scrollTop
-
-        const height =
-            document.documentElement.scrollHeight -
-            document.documentElement.clientHeight
-
-        const scrolled = winScroll / height
-
-        this.setState({
-            theposition: scrolled,
-        })
     }
 
     componentWillUnmount() {
@@ -133,9 +117,8 @@ class Journey extends Component {
 
 
     render() {
-        const { broads, theposition } = this.state;
+        const { broads } = this.state;
         const { logo, history, isLogin } = this.props;
-        console.log(theposition)
         return <div className="journey">
             <Helmet>
                 <title>Journey</title>
@@ -164,7 +147,7 @@ class Journey extends Component {
                     : <></>}
 
                 <aside className="head-div">
-                    <header onClick={this.toLoginpage} className={(parseFloat(theposition) > 0.05) ? "fixed" : ""}>
+                    <header onClick={this.toLoginpage}>
                         <div id="title">
                             <p id="heading-p">Create a post</p>
                         </div>

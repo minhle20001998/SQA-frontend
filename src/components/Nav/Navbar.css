@@ -2,7 +2,13 @@
   --white-beige-color: #fdf0e5;
 }
 
+.nav-bar {
+  height: 80px;
+}
+
 .client-navbar {
+  width: 100%;
+  position: fixed;
   overflow: hidden;
   display: flex;
   justify-content: space-between;
@@ -10,10 +16,15 @@
   font-family: "Playfair Display", serif;
   padding: 5px 0;
   background-color: white;
+  box-shadow: 0 0 5px rgb(199, 199, 199);
+  top: 0;
+  z-index: 999;
 }
+
 .homestay-logo {
   padding: 0 0 0 20px;
 }
+
 .homestay-logo img {
   width: 180px;
   height: 70px;
@@ -86,6 +97,9 @@
 }
 
 @media only screen and (max-width: 1090px) {
+  .nav-bar {
+    height: 510px;
+  }
   .client-navbar {
     display: flex;
     justify-content: center;
