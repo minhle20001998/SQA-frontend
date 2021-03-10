@@ -1,0 +1,127 @@
+.admin-booking {
+  display: flex;
+  flex-direction: row;
+  background: #f0f3fb;
+  height: 100%;
+  position: relative;
+}
+
+.admin-booking header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px 20px 20px;
+}
+
+.admin-booking header h4 {
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Playfair Display", sans-serif;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.admin-booking header i {
+  font-size: 35px;
+  color: rgb(65, 206, 65);
+  box-shadow: 0px 0px 5px rgb(190, 190, 190);
+  border: 1px solid rgb(0, 196, 59);
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.admin-booking section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+
+.MuiDataGrid-viewport {
+  border: 2px solid rgb(136, 136, 136);
+}
+.MuiDataGrid-columnsContainer {
+  border: 2px solid rgb(136, 136, 136);
+  background: rgba(187, 187, 187, 0.986);
+}
+
+.table-buttons {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.green-btn {
+  background-color: rgb(146, 153, 255);
+
+  color: white;
+}
+
+.red-btn {
+  background-color: rgb(255, 103, 103);
+  color: white;
+}
+
+.MuiPaper-root {
+  width: 500px;
+}
+
+.MuiDialogContent-root {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.MuiDialogContent-root > div {
+  margin: 15px 0px;
+}
+
+.MuiDialogContent-root p {
+  color: rgb(97, 97, 97);
+}
+
+.MuiDialogContent-root input,
+.MuiDialogContent-root textarea {
+  height: 40px;
+  padding: 10px;
+  outline: none;
+  background-color: transparent;
+  border: 1px solid rgb(122, 122, 122);
+}
+
+.MuiDialogContent-root input:focus,
+.MuiDialogContent-root textarea:focus {
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.full-size {
+  width: 100%;
+}
+
+.MuiDialogContent-root textarea {
+  width: 100%;
+  height: 200px;
+  resize: none;
+}
+
+.action-btn {
+  width: 70px;
+  height: 35px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  outline: none;
+  box-shadow: 0 2px 5px rgb(180, 180, 180);
+}
+
+#save-btn {
+  background-color: #3f51b5;
+}
+
+#close-btn {
+  background-color: #f44336;
+}

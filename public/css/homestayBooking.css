@@ -1,0 +1,215 @@
+header {
+	position: absolute;
+	z-index: 99999;
+	width: 100%;
+	height: 112px;
+	-webkit-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.logo img {
+	height: 98px;
+	width: 105px; 
+	border-radius: 100%;
+}
+
+.navbar .navbar-nav .nav-item {
+	margin: 0px 30px;
+}
+
+.navbar .navbar-nav a.nav-link {
+	font-family: 'Playfair Display';
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 400;
+    color: #000000;
+    line-height: 32px;
+    text-align: center;
+}
+
+.fa {
+    color: #000000;
+	font-size: 40px;
+	margin: 0px 3px;
+}
+
+.main-banner img {
+	width: 100%;
+	height: 525px;
+	margin-top: 112px;
+}
+
+.main-content .meta-text h2 {
+	font-family: Playfair Display;
+	font-size: 52px;
+	font-style: italic;
+	font-weight: 400;
+	line-height: 69px;
+	letter-spacing: 0em;
+	text-align: center;
+    color: #FFFFFF;
+    margin-top: -350px;
+}
+
+.search {
+	margin-left: 500px;
+}
+
+.searchText {
+	height: 50px;
+	width: 300px;
+}
+
+.detail-parts {
+	margin-top:250px;
+}
+
+.container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 15px;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.small-img {
+	margin-right: 0px;
+    margin-left: 0px;
+}
+
+.small-img img {
+	height: 120px;
+}
+
+.mySlides img {
+	height: 500px;
+}
+
+.column {
+  float: left;
+  width: 25%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+.information {
+	border: 1px solid #EBEBEB;
+    padding:15px 20px;
+    background-color: #EBEBEB;
+}
+
+.information .row {
+	padding-bottom: 10px;
+}
+
+.information .fa {
+	font-size: 20px;
+	width: 20px;
+	height: 20px;
+}
+
+.advertisment {
+	padding-top: 50px;
+}
+
+.comment {
+	margin: 50px -15px;
+}
+
+.comment-item {
+	padding-top: 30px;
+	margin-left: 15px;
+}
+
+.comment-item img {
+	border-radius: 100%;
+}
+
+.right-content {
+	margin-left: 20px;
+}
+/*body stype*/
+
+.footer {
+	background-color: #F7F7F7;
+	height: 100px;
+	margin: auto;
+}
+
+.content-footer {
+	padding-top: 35px;
+}
+
+.logo-footer img {
+	height: 100px;
+	width: 100px;
+	border-radius: 100%;
+}

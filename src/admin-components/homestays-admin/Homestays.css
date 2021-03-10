@@ -1,0 +1,51 @@
+.admin-homestays {
+  display: flex;
+  flex-direction: row;
+  background: #f0f3fb;
+  height: 100%;
+  position: relative;
+}
+
+.admin-homestays header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px 20px 20px;
+}
+
+.admin-homestays header h4 {
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Playfair Display", sans-serif;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.admin-homestays header i {
+  font-size: 35px;
+  color: rgb(65, 206, 65);
+  box-shadow: 0px 0px 5px rgb(190, 190, 190);
+  border: 1px solid rgb(0, 196, 59);
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.admin-homestays section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.MuiTablePagination-actions button {
+  outline: none;
+}
+
+.MuiTablePagination-actions button:hover {
+  background-color: rgb(223, 223, 223);
+}
+
+.MuiTablePagination-actions button span {
+  color: black !important;
+}

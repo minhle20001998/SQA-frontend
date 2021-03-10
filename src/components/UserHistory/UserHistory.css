@@ -1,0 +1,37 @@
+.user-history {
+  height: 100vh;
+}
+
+.MuiDataGrid-root {
+  width: 720px;
+}
+
+.user-history header {
+  margin-top: 50px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+.user-history header p {
+  font-size: 40px;
+}
+.data-table {
+  padding: 0 10px;
+  display: flex;
+  justify-content: center;
+  min-height: 415px !important;
+}
+
+.data-table .table-head {
+  background-color: rgb(247, 209, 160);
+}
+
+.MuiTableContainer-root {
+  width: 1000px !important;
+}
+
+.MuiTableCell-root {
+  font-size: 16px !important;
+  border: 1px solid rgb(190, 190, 190) !important;
+}

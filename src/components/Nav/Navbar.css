@@ -1,0 +1,135 @@
+:root {
+  --white-beige-color: #fdf0e5;
+}
+
+.client-navbar {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  font-family: "Playfair Display", serif;
+  padding: 5px 0;
+  background-color: white;
+}
+.homestay-logo {
+  padding: 0 0 0 20px;
+}
+.homestay-logo img {
+  width: 180px;
+  height: 70px;
+}
+
+.client-navbar .links {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px 0 0;
+}
+
+.client-navbar .links a {
+  width: max-content;
+  display: inline-block;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: rgb(75, 75, 75);
+  font-size: 20px;
+}
+
+.client-navbar .links ul {
+  margin: 0;
+  list-style-type: none;
+  list-style: none;
+  display: flex;
+}
+
+.client-navbar .links ul li {
+  padding: 0px 20px 0 10px;
+  float: left;
+}
+
+.client-navbar .links ul a:hover {
+  color: rgb(49, 18, 0);
+  text-decoration: underline;
+}
+
+.client-navbar .user-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 50px 0 50px;
+}
+
+.client-navbar .user-area a {
+  font-size: 18px;
+  margin: 0 8px;
+}
+
+.client-navbar .user-area i {
+  color: rgb(54, 24, 0);
+  font-size: 30px;
+  margin: 0 10px 0 30px;
+}
+
+.client-navbar .user-area i:hover {
+  color: rgb(117, 53, 0);
+}
+
+.client-navbar abbr {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1211px) {
+  .client-navbar .links a {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 1090px) {
+  .client-navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column !important;
+    position: relative;
+  }
+  .client-navbar .links a {
+    font-size: 24px;
+  }
+  .client-navbar .homestay-logo {
+    padding: 0 10px !important;
+    width: 100%;
+  }
+  .links {
+    padding: 30px 0 0 0 !important;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .client-navbar .links ul {
+    width: 100%;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: column !important;
+  }
+  .client-navbar .links ul li {
+    border-bottom: 2px solid rgb(182, 182, 182);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 !important;
+    width: 100%;
+    height: 100px;
+  }
+  .client-navbar .user-area {
+    position: absolute;
+    right: 10px;
+    top: 30px;
+    padding: 0 0;
+  }
+}
+
+.underline {
+  text-decoration: underline !important ;
+}

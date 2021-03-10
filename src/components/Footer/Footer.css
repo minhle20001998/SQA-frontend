@@ -1,0 +1,78 @@
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px 70px 0px 70px;
+  background-color: white;
+}
+
+footer > div {
+  color: #4e4e4e;
+  font-family: Lato;
+  margin-bottom: 40px;
+}
+
+footer .footer-bar {
+  width: 100%;
+  min-width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #f7f7f7;
+  border-radius: 10px;
+  padding: 0 40px;
+}
+footer .footer-bar > div {
+  width: 250px;
+}
+footer .footer-bar .community {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px
+}
+footer .footer-bar .community > a > i {
+  font-size: 30px;
+  margin: 0 10px;
+  color: #4f4f4f;
+}
+
+.copyright > p {
+  margin-bottom: 20px;
+}
+.copyright {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+@media only screen and (max-width: 841px) {
+  footer .footer-bar > * {
+    margin-bottom: 20px;
+  }
+  footer .footer-bar {
+    padding: 20px 40px !important;
+  }
+
+  footer .footer-bar .homestay-logo{
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer-bar .address {
+    text-align: center;
+  }
+  footer > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .copyright p {
+    text-align: center;
+  }
+}

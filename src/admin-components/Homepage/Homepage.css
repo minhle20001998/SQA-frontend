@@ -1,0 +1,75 @@
+.admin-homepage {
+  display: flex;
+  flex-direction: row;
+  background: #f0f3fb;
+  height: 100%;
+}
+
+.main-view {
+  width: 100%;
+  padding: 0 0 0 240px;
+}
+
+.admin-homepage header {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.admin-homepage header h4 {
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Playfair Display", sans-serif;
+  color: #555;
+  margin-bottom: 5px;
+}
+.welcome-header {
+  font-weight: 700 !important;
+}
+
+.admin-homepage section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.admin-homepage section > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 250px;
+  min-width: 200px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgb(219, 219, 219);
+  margin: 10px 10px;
+}
+
+.statistic-icon {
+  box-shadow: 2px 2px 5px rgb(177, 177, 177);
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+.statistic-icon i {
+  color: white;
+  font-size: 30px;
+}
+
+.statistic-name {
+  font-weight: bold;
+  font-size: 20px;
+  color: #212529;
+  font-family: "Playfair Display", sans-serif;
+
+}
+
+.statistic-data {
+  font-size: 35px;
+  font-weight: bold;
+  font-family: "Playfair Display", sans-serif;
+  color: #212529;
+}

@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.homestay{
+    height: 100vh;
+    position: relative;
+}
+
+button{
+  outline: none;
+  cursor: pointer;
+}
+
+.ScrollUpButton__Container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  cursor: pointer;
+  border-radius: 100%;
+}
+
+.ScrollUpButton__Container svg{
+  height: 20px !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+

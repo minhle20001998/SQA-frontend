@@ -1,0 +1,226 @@
+.head-div {
+  display: flex;
+  padding: 80px 40px 0 40px;
+}
+
+.journey {
+  background-color: rgb(245, 245, 245);
+}
+
+.journey p {
+  color: rgb(77, 77, 77);
+  margin: 0;
+}
+
+.journey header {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  box-shadow: 1px 1px 5px rgb(158, 158, 158);
+  padding-bottom: 25px;
+}
+
+.journey input {
+  color: rgb(77, 77, 77);
+}
+
+#title {
+  width: 100%;
+  background: rgb(255 225 158);
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 0 15px;
+  font-weight: 500;
+}
+
+#heading-p {
+  font-size: 20px;
+  margin: 0;
+}
+
+#post-body {
+  width: 100%;
+  padding: 0 15px;
+  background: white;
+}
+
+.post-input {
+  padding: 5px 0;
+  height: 150px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid rgb(218, 218, 218);
+  position: relative;
+}
+
+.post-input i {
+  text-align: center;
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(230, 230, 230);
+  color: rgb(187, 187, 187);
+}
+
+.post-button {
+  position: absolute;
+  right: 10px;
+  border: 1px solid rgb(170, 149, 104);
+  padding: 2px;
+  border-radius: 5px;
+  background-color: rgb(255, 225, 158);
+  color: rgb(78, 78, 78);
+}
+
+.post-button:hover {
+  background-color: rgb(236, 196, 109);
+}
+
+.post-input textarea {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  height: 100%;
+  font-size: 25px;
+  padding: 0 5px 0 5px;
+  resize: none;
+  padding: 50px 45px 10px 0;
+  color: rgb(61, 61, 61);
+}
+
+.post-input textarea::placeholder {
+  font-size: 25px;
+  color: rgb(145, 145, 145);
+}
+.post-input textarea::-webkit-scrollbar {
+  width: 5px;
+  cursor: pointer;
+}
+
+.post-input textarea::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(221, 221, 221);
+  border-radius: 10px;
+}
+
+.post-input textarea::-webkit-scrollbar-thumb {
+  background: rgb(255, 197, 72);
+  border-radius: 10px;
+}
+
+.post-input textarea::-webkit-scrollbar-thumb:hover {
+  background: rgb(224, 164, 33);
+}
+
+.board-input {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 20px;
+  margin-bottom: 10px;
+}
+
+.board-input i {
+  width: 25px;
+  color: #bd9560;
+  font-size: 25px;
+}
+
+.board-input input {
+  width: 80%;
+  height: 50px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  background-color: white;
+}
+
+.board-input input::placeholder {
+  font-size: 15px;
+  color: rgb(170, 170, 170);
+}
+
+#broad-news {
+  padding: 80px 40px 0 40px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+#broad-news .broad {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 1px 5px rgb(158 158 158);
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 50px;
+  padding: 15px 15px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+#broad-news .broad div {
+  margin-bottom: 20px;
+}
+
+#broad-news .broad div:nth-child(1) {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  margin-right: 10px;
+  border: 1px solid rgb(218, 218, 218);
+}
+
+#broad-news .broad .user-name {
+  font-size: 20px;
+  color: rgb(54, 54, 54);
+}
+
+#broad-news .broad .title {
+  font-size: 25px;
+  color: black;
+  font-weight: 500;
+}
+
+#broad-news .broad .address {
+  font-size: 13px;
+  font-style: italic;
+  margin-bottom: 10px;
+  color: #d8994d;
+  font-weight: 600;
+}
+
+#broad-news .broad .content {
+  margin-bottom: 10px;
+}
+
+.tag-image {
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+  border-radius: 10px;
+}
+
+@media only screen and (max-width: 430px) {
+  .head-div {
+    padding: 80px 10px 0 10px;
+  }
+
+  #broad-news {
+    padding: 80px 10px 0 10px;
+  }
+
+  .tag-image {
+    height: 180px;
+  }
+}

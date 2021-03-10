@@ -1,0 +1,27 @@
+#admin-nav {
+  padding: 0 50px 0 0px;
+  width: 100%;
+  background: linear-gradient(90deg, #048efb, #08b1d6);
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#admin-nav > * {
+  margin: 0 10px;
+}
+
+#admin-nav .admin-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  box-shadow: 0px 0px 10px black;
+}
+
+#admin-nav .setting-icon {
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}
