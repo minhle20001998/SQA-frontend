@@ -97,8 +97,7 @@ label {
 }
 .homestays {
   width: 100%;
-  display: grid;
-  grid-template-columns: auto auto auto;
+  display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }

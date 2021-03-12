@@ -126,8 +126,8 @@ class Journey extends Component {
             <ScrollToTop />
             <ScrollUpButton />
             <Navbar current="homepage" logo={logo} isLogin={isLogin} current="journey experiences" />
-            <main>
-                {broads ?
+            {broads ?
+                <main>
                     <section id="broad-news">
                         {broads.map((broad, index) => {
                             return <div className="broad" key={index}>
@@ -144,35 +144,34 @@ class Journey extends Component {
                             </div>
                         })}
                     </section>
-                    : <></>}
-
-                <aside className="head-div">
-                    <header onClick={this.toLoginpage}>
-                        <div id="title">
-                            <p id="heading-p">Create a post</p>
-                        </div>
-                        <div id="post-body">
-                            <div className="post-input">
-                                <button className="post-button" onClick={this.handlePost}>Post</button>
-                                <i className="fas fa-user"></i>
-                                <textarea className="experience-input" placeholder="What's on your mind ?" onInput={this.handleContentInput} />
+                    <aside className="head-div">
+                        <header onClick={this.toLoginpage}>
+                            <div id="title">
+                                <p id="heading-p">Create a post</p>
                             </div>
-                            <div className="title-input board-input">
-                                <i className="fas fa-arrow-right"></i>
-                                <input className="experience-input" type="text" placeholder="Set your title" onInput={this.handleTitleInput} />
+                            <div id="post-body">
+                                <div className="post-input">
+                                    <button className="post-button" onClick={this.handlePost}>Post</button>
+                                    <i className="fas fa-user"></i>
+                                    <textarea className="experience-input" placeholder="What's on your mind ?" onInput={this.handleContentInput} />
+                                </div>
+                                <div className="title-input board-input">
+                                    <i className="fas fa-arrow-right"></i>
+                                    <input className="experience-input" type="text" placeholder="Set your title" onInput={this.handleTitleInput} />
+                                </div>
+                                <div className="image-input board-input">
+                                    <i className="far fa-image"></i>
+                                    <input className="experience-input" type="text" placeholder="Put your image link here" onInput={this.handleImageLinkInput} />
+                                </div>
+                                <div className="address-input board-input">
+                                    <i className="fas fa-map-marker-alt"></i>
+                                    <input className="experience-input" type="text" placeholder="Where are you ?" onInput={this.handleAddressInput} />
+                                </div>
                             </div>
-                            <div className="image-input board-input">
-                                <i className="far fa-image"></i>
-                                <input className="experience-input" type="text" placeholder="Put your image link here" onInput={this.handleImageLinkInput} />
-                            </div>
-                            <div className="address-input board-input">
-                                <i className="fas fa-map-marker-alt"></i>
-                                <input className="experience-input" type="text" placeholder="Where are you ?" onInput={this.handleAddressInput} />
-                            </div>
-                        </div>
-                    </header>
-                </aside>
-            </main>
+                        </header>
+                    </aside>
+                </main>
+                : <></>}
             <Footer logo={logo}></Footer>
         </div>
     }

@@ -7,103 +7,119 @@ import Slideshow from "../Slideshow/Slideshow"
 import "./HomestayBooking.css"
 import ScrollUpButton from "react-scroll-up-button";
 import ScrollToTop from "../ScrollToTop/ScrollToTop"
-import moneyFormatter from "../Functions/moneyFormatter"
+import { moneyFormatter } from "../Functions/moneyFormatter"
 import { Helmet } from "react-helmet";
+import { removeVietnameseTones } from "../Functions/removeVietnamese"
 class HomestayBooking extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            homestays: [
-            ],
-            searchQuery: {
-                address: "",
-                checkIn: "",
-                checkOut: "",
-                quantityOfPeople: "",
-                quantityOfChildren: "",
-                dormRoom: ""
-            },
+            homestays: [],
+            show: [],
+            priceLower: "",
+            priceHigher: "",
             steps: 6
         };
         this.handleAddressInput = this.handleAddressInput.bind(this);
-        this.handleCheckInInput = this.handleCheckInInput.bind(this);
-        this.handleCheckOutInput = this.handleCheckOutInput.bind(this);
-        this.handleQuantityPeople = this.handleQuantityPeople.bind(this);
-        this.handleQuantityChildren = this.handleQuantityChildren.bind(this);
-        this.handleDormRoom = this.handleDormRoom.bind(this);
+        this.handleNameInput = this.handleNameInput.bind(this);
+        this.handlePriceLowerInput = this.handlePriceLowerInput.bind(this);
+        this.handlePriceHigherInput = this.handlePriceHigherInput.bind(this);
         this.handleLoadMore = this.handleLoadMore.bind(this);
+        this.searchPrice = this.searchPrice.bind(this);
+        this.search = this.search.bind(this);
+    }
+
+    search(field, input) {
+        const { homestays, priceLower, priceHigher } = this.state;
+        if (field === "address") {
+            const filter = homestays.filter((homestay) => {
+                return removeVietnameseTones((homestay.address).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()));
+            })
+            this.setState({
+                show: filter
+            })
+        }
+        if (field === "name") {
+            const filter = homestays.filter((homestay) => {
+                return removeVietnameseTones((homestay.name).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()));
+            })
+            this.setState({
+                show: filter
+            })
+        }
+    }
+
+    searchPrice() {
+        const { homestays, priceLower, priceHigher } = this.state;
+        const filter = homestays.filter((homestay) => {
+            if ((priceLower) !== "" && (priceHigher) !== "") {
+                if (parseInt(homestay.price) < parseInt(priceLower) && parseInt(homestay.price) > parseInt(priceHigher)) {
+                    return homestay
+                }
+            } else if ((priceLower) === "" && (priceHigher) !== "") {
+                if (parseInt(homestay.price) > parseInt(priceHigher)) {
+                    return homestay
+                }
+            } else if ((priceLower) !== "" && (priceHigher) === "") {
+                if (parseInt(homestay.price) < parseInt(priceLower)) {
+                    return homestay
+                }
+            } else {
+                return homestay
+            }
+        })
+        this.setState({
+            show: filter
+        })
     }
 
     handleAddressInput(e) {
         const address = e.target.value;
-        this.setState({
-            searchQuery: {
-                ...this.state.searchQuery,
-                address
-            }
-        });
+        this.search("address", address);
     }
 
-    handleCheckInInput(e) {
-        const checkIn = e.target.value;
-        this.setState({
-            searchQuery: {
-                ...this.state.searchQuery,
-                checkIn
-            }
-        });
+
+    handleNameInput(e) {
+        const name = e.target.value;
+        this.search("name", name);
     }
 
-    handleCheckOutInput(e) {
-        const checkOut = e.target.value;
+    handlePriceLowerInput(e) {
+        const priceLower = e.target.value;
         this.setState({
-            searchQuery: {
-                ...this.state.searchQuery,
-                checkOut
-            }
-        });
+            priceLower: priceLower
+        }, this.searchPrice)
     }
 
-    handleQuantityPeople(e) {
-        const quantityOfPeople = e.target.value;
+    handlePriceHigherInput(e) {
+        const priceHigher = e.target.value;
         this.setState({
-            searchQuery: {
-                ...this.state.searchQuery,
-                quantityOfPeople
-            }
-        });
+            priceHigher: priceHigher
+        }, this.searchPrice)
+
     }
 
-    handleQuantityChildren(e) {
-        const quantityOfChildren = e.target.value;
-        this.setState({
-            searchQuery: {
-                ...this.state.searchQuery,
-                quantityOfChildren
-            }
-        });
-    }
-
-    handleDormRoom(e) {
-        const dormRoom = e.target.value;
-        this.setState({
-            searchQuery: {
-                ...this.state.searchQuery,
-                dormRoom
-            }
-        })
-    }
-
-    handleLoadMore() {
+    handleLoadMore(e) {
         const { homestays, steps } = this.state;
+        const init_steps = 6;
+        const top = document.querySelector('#homestay-booking-header');
         if (steps + 6 < homestays.length) {
             this.setState({
                 steps: steps + 6
             })
+            e.target.textContent = "Load More";
         } else {
             this.setState({
                 steps: homestays.length
             })
+            e.target.textContent = "View Less";
+        }
+        if (steps == homestays.length) {
+            top.scrollIntoView();
+            this.setState({
+                steps: init_steps
+            })
+            e.target.textContent = "Load More";
         }
     }
 
@@ -113,15 +129,16 @@ class HomestayBooking extends Component {
         const urlHomestay = "https://sqa-api.herokuapp.com/homestay";
         const resHomestay = await axios.get(urlHomestay);
         const dataHomestay = await resHomestay.data;
+        console.log(dataHomestay);
         this.setState({
             homestays: dataHomestay,
-
+            show: dataHomestay
         });
 
     }
 
     render() {
-        const { slideImages, homestays, steps } = this.state;
+        const { slideImages, homestays, steps, show } = this.state;
         const { isLogin, logo } = this.props;
         return <div className="homestay-booking">
             <Helmet>
@@ -140,43 +157,27 @@ class HomestayBooking extends Component {
             {/*  */}
             <section id="homestay-booking-section">
                 <div className="side-bar">
+                    {/* search name */}
+                    <label htmlFor="name">search by name</label>
+                    <input type="text" name="name" id="name" onInput={this.handleNameInput} />
                     {/* search bar */}
-                    <label htmlFor="search-bar">search address</label>
+                    <label htmlFor="search-bar">search by address</label>
                     <input type="text" id="search-bar" name="search-bar" onInput={this.handleAddressInput} />
-                    {/* check-in */}
-                    <label htmlFor="check-in">check-in</label>
-                    <input type="date" name="check-in" id="check-in" onInput={this.handleCheckInInput} />
-                    {/* check-out */}
-                    <label htmlFor="check-out">check-out</label>
-                    <input type="date" id="check-out" name="check-out" onInput={this.handleCheckOutInput} />
-                    {/* options */}
-                    <div className="options-div">
-                        <div className="people-quantity">
-                            <label htmlFor="people-quantity-number">quantity of people</label>
-                            <input type="number" id="people-quantity-number" min="0" inputMode="numeric" pattern="[0-9]*"
-                                onInput={this.handleQuantityPeople} />
-                        </div>
-                        <div className="children-quantity">
-                            <label htmlFor="children-quantity-number">quantity of children</label>
-                            <input type="number" id="children-quantity-number" min="0" inputMode="numeric" pattern="[0-9]*"
-                                onInput={this.handleQuantityChildren} />
-                        </div>
-                        <div className="dorm-room">
-                            <label htmlFor="dorm-room-number">dorm room</label>
-                            <input type="number" id="dorm-room-number" min="0" inputMode="numeric" pattern="[0-9]*"
-                                onInput={this.handleDormRoom} />
-                        </div>
-                    </div>
+                    {/* price lower */}
+                    <label htmlFor="search-bar">search by price (lower) </label>
+                    <input type="number" id="search-bar" name="search-bar" onInput={this.handlePriceLowerInput} />
+                    {/* price lower */}
+                    <label htmlFor="search-bar">search by price (higher) </label>
+                    <input type="number" id="search-bar" name="search-bar" onInput={this.handlePriceHigherInput} />
                     <div className="search-button-div">
                         <button className="search-button">search</button>
                     </div>
                 </div>
                 <div className="right-side">
                     <div className="homestays">
-                        {homestays && homestays.length > 0 && homestays.map((homestay, index) => {
+                        {show && show.length > 0 && show.map((homestay, index) => {
                             if (index < steps) {
-
-                                return <Link to={`homestay/${homestay._id}`} key={homestay.name + "-link"}>
+                                return <Link to={`homestay/${homestay._id}`} key={index}>
                                     <div className="thumbnail" style={{ backgroundImage: `url(${homestay.image_link[0]})` }}></div>
                                     <p className="homestay-name">{homestay.name}</p>
                                     <p className="homestay-address">{homestay.address}</p>

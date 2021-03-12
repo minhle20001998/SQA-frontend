@@ -14,7 +14,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import moneyFormatter from "../Functions/moneyFormatter"
+import { moneyFormatter } from "../Functions/moneyFormatter"
 import { Helmet } from "react-helmet";
 class HomestayDetail extends Component {
 
@@ -126,7 +126,7 @@ class HomestayDetail extends Component {
         const { user, homestay } = this.state;
         const transaction_url = "https://sqa-api.herokuapp.com/transaction"
         const amount = parseInt(document.querySelector('#amount').value);
-        if (amount) {
+        if (amount && amount > 0) {
             const request = {
                 user_id: user._id,
                 homestay_id: homestay._id,
@@ -210,9 +210,11 @@ class HomestayDetail extends Component {
                                     {/* <!-- Thumbnail images --> */}
                                     <div className="row small-img">
                                         {homestay.image_link.map((image, index) => {
-                                            return <div className="column" key={index}>
-                                                <img className="demo cursor" src={image} style={{ width: 100 + "%" }} onClick={() => { this.changeSlide(index) }} alt="slide1" />
-                                            </div>
+                                            if (index < 4) {
+                                                return <div className="column" key={index}>
+                                                    <img className="demo cursor" src={image} style={{ width: 100 + "%" }} onClick={() => { this.changeSlide(index) }} alt="slide1" />
+                                                </div>
+                                            }
                                         }
                                         )}
                                     </div>

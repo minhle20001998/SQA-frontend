@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { DataGrid } from '@material-ui/data-grid';
+import Button from '@material-ui/core/Button';
 import Navbar from '../navbar/Navbar'
 import Sidebar from '../sidebar/Sidebar'
 import './Homestays.css'
-import { getHomeStay, addHomeStay } from '../../utils/requestAPI/index';
-import AddHomestayDialog from './AddHomestayDialog'
+import { getHomeStay, addHomeStay, editHomeStay, deleteHomeStay } from '../../utils/requestAPI/index';
+import AddHomestayDialog from './AddHomestayDialog';
+import EditHomestayDialog from './EditHomestayDialog';
+import DeleteHomestayDialog from './DeleteHomestayDialog';
 
 
 
@@ -12,8 +15,10 @@ class Homestays extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            selectedItem: null,
             isOpenDialogAdd: false,
             isOpenDialogDelete: false,
+            isOpenDialogEdit: false,
             editInfo: {
                 id: "",
                 catalogName: "",
@@ -44,39 +49,45 @@ class Homestays extends Component {
                     width: 200,
 
                 },
-                // {
-                //     field: "Edit",
-                //     width: 60,
-                //     sortable: false,
-                //     renderCell: (params) => (
-                //         <button className="table-buttons green-btn" id='edit' value={params.getValue('id')}
-                //             onClick={this.handleEditOnClick}>
-                //             Edit
-                //         </button>
-                //     )
-                // },
+                {
+                    field: "Edit",
+                    width: 100,
+                    sortable: false,
+                    renderCell: (params) => {
+                        const { row } = params;
+                        return (
+                            <Button variant="contained" color="primary" onClick={() => this.handleToggleDialogEdit(row)} >
+                                Edit
+                            </Button>
+                        )
+                    }
+                },
                 {
                     field: "Delete",
-                    width: 80,
+                    width: 100,
                     sortable: false,
-                    renderCell: (params) => (
-                        <button className="table-buttons red-btn" id='delete' value={params.getValue('id')}
-                            onClick={this.handleToggleDialogDelete}
-                        >
-                            Delete
-                        </button>
-                    )
+                    renderCell: (params) => {
+                        const { row } = params;
+                        return (
+                            <Button variant="contained" color="secondary" onClick={() => this.handleToggleDialogDelete(row)}>
+                                Delete
+                            </Button>
+                        )
+                    }
+                    
                 },
             ],
             rows: [],
             currentData: null
         }
         this.handleToggleDialogAdd = this.handleToggleDialogAdd.bind(this);
-        this.handleEditClose = this.handleEditClose.bind(this);
         this.getIndex = this.getIndex.bind(this);
         this.getHomeStaysList = this.getHomeStaysList.bind(this);
         this.addNewHomeStay = this.addNewHomeStay.bind(this);
         this.handleToggleDialogDelete = this.handleToggleDialogDelete.bind(this);
+        this.handleToggleDialogEdit = this.handleToggleDialogEdit.bind(this);
+        this.editHomeStay = this.editHomeStay.bind(this);
+        this.deleteHomeStay = this.deleteHomeStay.bind(this);
     }
 
     async getHomeStaysList() {
@@ -89,6 +100,18 @@ class Homestays extends Component {
     async addNewHomeStay(data) {
         const result = await addHomeStay(data);
         this.handleToggleDialogAdd();
+        this.getHomeStaysList();
+    }
+
+    async editHomeStay(data) {
+        const result = await editHomeStay(data);
+        this.handleToggleDialogEdit();
+        this.getHomeStaysList();
+    }
+
+    async deleteHomeStay(data) {
+        const result = await deleteHomeStay(data);
+        this.handleToggleDialogDelete();
         this.getHomeStaysList();
     }
 
@@ -111,26 +134,43 @@ class Homestays extends Component {
         }));
     }
 
-    handleToggleDialogDelete() {
+    handleToggleDialogDelete(row) {
         this.setState((currentState) => ({
-            isOpenDialogDelete: !currentState.isOpenDialogDelete
+            isOpenDialogDelete: !currentState.isOpenDialogDelete,
+            selectedItem: row ? row : null
         }));
     }
 
-    handleEditClose() {
-        this.setState({
-            dialogOpen: false
-        })
+    handleToggleDialogEdit(row) {
+        this.setState((currentState) => ({
+            isOpenDialogEdit: !currentState.isOpenDialogEdit,
+            selectedItem: row ? row : null
+        }))
     }
     render() {
-        const { dialogOpen, columns, rows, currentData, isOpenDialogAdd, handleToggleDialogDelete } = this.state;
+        const { columns, rows, isOpenDialogAdd, isOpenDialogEdit, selectedItem, isOpenDialogDelete } = this.state;
         return <div className="admin-homestays" style={{ width: '100%' }}>
             {
                 isOpenDialogAdd && <AddHomestayDialog
                     open={isOpenDialogAdd}
                     handleToggleDialogAdd={this.handleToggleDialogAdd}
                     addNewHomeStay={this.addNewHomeStay}
+                />
+            }
+            {
+                isOpenDialogEdit && selectedItem && <EditHomestayDialog
+                    open={isOpenDialogEdit}
+                    handleToggleDialogEdit={this.handleToggleDialogEdit}
+                    selectedItem={selectedItem}
+                    editHomeStay={this.editHomeStay}
+                />
+            }
+            {
+                isOpenDialogDelete && selectedItem && <DeleteHomestayDialog
+                    open={isOpenDialogDelete}
                     handleToggleDialogDelete={this.handleToggleDialogDelete}
+                    selectedItem={selectedItem}
+                    deleteHomeStay={this.deleteHomeStay}
                 />
             }
             <Sidebar />

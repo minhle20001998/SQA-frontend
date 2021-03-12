@@ -8,7 +8,7 @@ import './Homepage.css';
 import ScrollUpButton from "react-scroll-up-button";
 import user_image from "../../images/user.png";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
-import moneyFormatter from "../Functions/moneyFormatter";
+import { moneyFormatter } from "../Functions/moneyFormatter";
 import { Helmet } from "react-helmet";
 
 class Homepage extends Component {
@@ -20,8 +20,6 @@ class Homepage extends Component {
         }
 
     }
-
-
     async componentDidMount() {
         console.log("homepage")
         const urlHomestay = "https://sqa-api.herokuapp.com/homestay";
@@ -85,7 +83,7 @@ class Homepage extends Component {
                     <p className="main-heading">Our most popular homestay</p>
                     <div className="popular-homestays-body">
                         {homestays && homestays.map(homestay =>
-                            <Link to="/" key={homestay.name + "-link"}>
+                            <Link to={`/homestay/${homestay._id}`} key={homestay.name + "-link"}>
                                 <div className="thumbnail" style={{ backgroundImage: `url(${homestay.image_link[0]})` }}></div>
                                 <p className="homestay-name">{homestay.name}</p>
                                 <p className="homestay-address">{homestay.address}</p>

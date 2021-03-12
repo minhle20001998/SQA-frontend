@@ -1,3 +1,3 @@
-export default function moneyFormatter(money) {
+exports.moneyFormatter = (money) => {
     return Intl.NumberFormat().format(money);
 }

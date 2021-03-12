@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import Container from '@material-ui/core/Container';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-class DeleteHomestayDialog extends Component {
+class DeleteUserDialog extends Component {
 
     constructor(props) {
         super(props)
@@ -14,9 +13,9 @@ class DeleteHomestayDialog extends Component {
     }
 
     handeDelete() {
-        const { deleteHomeStay, selectedItem } = this.props;
+        const { deleteUser, selectedItem } = this.props;
         const { _id } = selectedItem;
-        deleteHomeStay({
+        deleteUser({
             _id: _id
         });
     }
@@ -25,11 +24,11 @@ class DeleteHomestayDialog extends Component {
         const { open, handleToggleDialogDelete } = this.props;
         return (
             <Dialog open={open} >
-                <DialogTitle id="form-dialog-title">Delete Homestay</DialogTitle>
+                <DialogTitle id="form-dialog-title">Delete User</DialogTitle>
                 <DialogContent>
                     <div>
                         <DialogContentText>
-                            Do you want to delete this homestay?
+                            Do you want to delete this user?
                         </DialogContentText>
                     </div>
                     <DialogActions>
@@ -42,4 +41,4 @@ class DeleteHomestayDialog extends Component {
     }
 }
 
-export default DeleteHomestayDialog;
+export default DeleteUserDialog;

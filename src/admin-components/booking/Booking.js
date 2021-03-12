@@ -7,8 +7,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Navbar from '../navbar/Navbar'
 import Sidebar from '../sidebar/Sidebar'
-import { getBooking } from '../../utils/requestAPI/index';
-import './Booking.css'
+import Button from '@material-ui/core/Button';
+import { getBooking, deleteBooking } from '../../utils/requestAPI/index';
+import './Booking.css';
+import DeleteBookingDialog from './DeleteBookingDialog';
 
 
 
@@ -16,7 +18,8 @@ class Booking extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dialogOpen: false,
+            selectedItem: null,
+            isOpenDialogDelete: false,
             editInfo: {
                 id: "",
                 catalogName: "",
@@ -70,36 +73,28 @@ class Booking extends Component {
                 },
                 {
                     field: "Delete",
-                    width: 80,
+                    width: 100,
                     sortable: false,
-                    renderCell: (params) => (
-                        <button className="table-buttons red-btn" id='delete' value={params.getValue('id')}
-                            onClick={this.handleEditOnClick}
-                        >
-                            Delete
-                        </button>
-                    )
+                    renderCell: (params) => {
+                        const { row } = params;
+                        return (
+                            <Button variant="contained" color="secondary" onClick={() => this.handleToggleDialogDelete(row)}>
+                                Delete
+                            </Button>
+                        )
+                    }
+                    
                 },
-
-
             ],
-            rows: [
-                // { id: 1, catalogName: 'Snow', price: 4000, name: 'Jon', address: 'Hanoi', description: "description goes here" },
-                // { id: 2, catalogName: 'Lannister', price: 4000, name: 'Cersei', address: 'Hanoi', description: "description goes here" },
-                // { id: 3, catalogName: 'Lannister', price: 4000, name: 'Jaime', address: 'Hanoi', description: "description goes here" },
-                // { id: 4, catalogName: 'Stark', price: 4000, name: 'Arya', address: 'Hanoi', description: "description goes here" },
-                // { id: 5, catalogName: 'Targaryen', price: 4000, name: 'Daenerys', address: 'Hanoi', description: "description goes here" },
-                // { id: 6, catalogName: 'Melisandre', price: 4000, name: 'Daenerys', address: 'Hanoi', description: "description goes here" },
-                // { id: 7, catalogName: 'Clifford', price: 4000, name: 'Ferrara', address: 'Hanoi', description: "description goes here" },
-                // { id: 8, catalogName: 'Frances', price: 4000, name: 'Rossini', address: 'Hanoi', description: "description goes here" },
-                // { id: 9, catalogName: 'Roxie', price: 4000, name: 'Harvey', address: 'Hanoi', description: "description goes here" },
-            ],
+            rows: [],
             currentData: null
         }
         this.handleEditOnClick = this.handleEditOnClick.bind(this);
         this.handleEditClose = this.handleEditClose.bind(this);
         this.getIndex = this.getIndex.bind(this);
         this.getBookingList = this.getBookingList.bind(this);
+        this.handleToggleDialogDelete = this.handleToggleDialogDelete.bind(this);
+        this.deleteBooking = this.deleteBooking.bind(this);
     }
 
     async getBookingList() {
@@ -110,6 +105,12 @@ class Booking extends Component {
                 id: item._id
             }))
         })
+    }
+
+    async deleteBooking(data) {
+        const result = await deleteBooking(data);
+        this.handleToggleDialogDelete();
+        this.getBookingList();
     }
 
     componentDidMount() {
@@ -139,55 +140,25 @@ class Booking extends Component {
             dialogOpen: false
         })
     }
-    render() {
-        const { dialogOpen, columns, rows, currentData } = this.state;
-        return <div className="admin-booking" style={{ width: '100%' }}>
-            <Dialog open={dialogOpen} onClose={this.handleEditClose} >
-                <DialogTitle id="form-dialog-title">Edit Booking</DialogTitle>
-                <DialogContent>
-                    <div>
-                        <DialogContentText>
-                            Homestay_ID
-                    </DialogContentText>
-                        <input type="text" defaultValue={rows[currentData] ? rows[currentData].id : ""} />
-                    </div>
-                    <div>
-                        <DialogContentText>
-                            Catalog Name
-                        </DialogContentText>
-                        <input type="text" />
-                    </div>
-                    <div>
-                        <DialogContentText>
-                            Price
-                        </DialogContentText>
-                        <input type="number" defaultValue={rows[currentData] ? rows[currentData].price : ""} />
-                    </div>
-                    <div>
-                        <DialogContentText>
-                            Name
-                        </DialogContentText>
-                        <input type="text" defaultValue={rows[currentData] ? rows[currentData].name : ""} />
-                    </div>
-                    <div>
-                        <DialogContentText>
-                            Address
-                        </DialogContentText>
-                        <input type="text" defaultValue={rows[currentData] ? rows[currentData].address : ""} />
-                    </div>
-                    <div className="full-size">
-                        <DialogContentText>
-                            Description
-                        </DialogContentText>
-                        <textarea defaultValue={rows[currentData] ? rows[currentData].description : ""}></textarea>
-                    </div>
-                    <DialogActions>
-                        <button className="action-btn" id="save-btn">Save</button>
-                        <button className="action-btn" id="close-btn" onClick={this.handleEditClose}>Close</button>
-                    </DialogActions>
-                </DialogContent>
 
-            </Dialog>
+    handleToggleDialogDelete(row) {
+        this.setState((currentState) => ({
+            isOpenDialogDelete: !currentState.isOpenDialogDelete,
+            selectedItem: row ? row : null
+        }));
+    }
+
+    render() {
+        const { dialogOpen, columns, rows, currentData, isOpenDialogDelete, selectedItem } = this.state;
+        return <div className="admin-booking" style={{ width: '100%' }}>
+             {
+                isOpenDialogDelete && selectedItem && <DeleteBookingDialog
+                    open={isOpenDialogDelete}
+                    handleToggleDialogDelete={this.handleToggleDialogDelete}
+                    selectedItem={selectedItem}
+                    deleteBooking={this.deleteBooking}
+                />
+            }
             <Sidebar />
             <div className="main-view">
                 <Navbar />

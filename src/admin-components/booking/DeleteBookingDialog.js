@@ -14,9 +14,9 @@ class DeleteHomestayDialog extends Component {
     }
 
     handeDelete() {
-        const { deleteHomeStay, selectedItem } = this.props;
+        const { deleteBooking, selectedItem } = this.props;
         const { _id } = selectedItem;
-        deleteHomeStay({
+        deleteBooking({
             _id: _id
         });
     }
@@ -25,11 +25,11 @@ class DeleteHomestayDialog extends Component {
         const { open, handleToggleDialogDelete } = this.props;
         return (
             <Dialog open={open} >
-                <DialogTitle id="form-dialog-title">Delete Homestay</DialogTitle>
+                <DialogTitle id="form-dialog-title">Delete Booking</DialogTitle>
                 <DialogContent>
                     <div>
                         <DialogContentText>
-                            Do you want to delete this homestay?
+                            Do you want to delete this booking?
                         </DialogContentText>
                     </div>
                     <DialogActions>

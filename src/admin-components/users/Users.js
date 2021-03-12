@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import { DataGrid } from '@material-ui/data-grid';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 import Navbar from '../navbar/Navbar'
 import Sidebar from '../sidebar/Sidebar'
-import { getUsers, addUser } from '../../utils/requestAPI/index';
+import { getUsers, addUser, editUser, deleteUser } from '../../utils/requestAPI/index';
 import './Users.css';
 import AddUserDialog from './AddUserDialog';
+import EditUserDialog from './EditUserDialog';
+import DeleteUserDialog from './DeleteUserDialog';
 
 
 
@@ -17,7 +15,10 @@ class Users extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedItem: null,
       isOpenDialogAdd: false,
+      isOpenDialogDelete: false,
+      isOpenDialogEdit: false,
       editInfo: {
         id: "",
         catalogName: "",
@@ -69,20 +70,33 @@ class Users extends Component {
           width: 200,
 
         },
+        // {
+        //   field: "Edit",
+        //   width: 100,
+        //   sortable: false,
+        //   renderCell: (params) => {
+        //     const { row } = params;
+        //     return (
+        //       <Button variant="contained" color="primary" onClick={() => this.handleToggleDialogEdit(row)} >
+        //         Edit
+        //       </Button>
+        //     )
+        //   }
+        // },
         {
           field: "Delete",
-          width: 80,
+          width: 100,
           sortable: false,
-          renderCell: (params) => (
-            <button className="table-buttons red-btn" id='delete' value={params.getValue('id')}
-              onClick={this.handleEditOnClick}
-            >
-              Delete
-            </button>
-          )
+          renderCell: (params) => {
+            const { row } = params;
+            return (
+              <Button variant="contained" color="secondary" onClick={() => this.handleToggleDialogDelete(row)}>
+                Delete
+              </Button>
+            )
+          }
+
         },
-
-
       ],
       rows: [],
       currentData: null
@@ -93,6 +107,10 @@ class Users extends Component {
     this.getUsersList = this.getUsersList.bind(this);
     this.addNewUser = this.addNewUser.bind(this);
     this.handleToggleDialogAdd = this.handleToggleDialogAdd.bind(this);
+    this.handleToggleDialogEdit = this.handleToggleDialogEdit.bind(this);
+    this.editUser = this.editUser.bind(this);
+    this.handleToggleDialogDelete = this.handleToggleDialogDelete.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
 
   async getUsersList() {
@@ -103,6 +121,25 @@ class Users extends Component {
         id: item._id
       }))
     })
+  }
+
+  async addNewUser(data) {
+    const result = await addUser(data);
+    console.log(result);
+    this.handleToggleDialogAdd();
+    this.getUsersList();
+  }
+
+  async editUser(data) {
+    const result = await editUser(data);
+    this.handleToggleDialogEdit();
+    this.getUsersList();
+  }
+
+  async deleteUser(data) {
+    const result = await deleteUser(data);
+    this.handleToggleDialogDelete();
+    this.getUsersList();
   }
 
   componentDidMount() {
@@ -139,18 +176,46 @@ class Users extends Component {
     }));
   }
 
-  async addNewUser(data) {
-    const result = await addUser(data);
-    console.log(result);
-    this.handleToggleDialogAdd();
-    this.getUsersList();
+  handleToggleDialogEdit(row) {
+    this.setState((currentState) => ({
+      isOpenDialogEdit: !currentState.isOpenDialogEdit,
+      selectedItem: row ? row : null
+    }))
   }
 
+  handleToggleDialogDelete(row) {
+    this.setState((currentState) => ({
+      isOpenDialogDelete: !currentState.isOpenDialogDelete,
+      selectedItem: row ? row : null
+    }));
+  }
+
+
   render() {
-    const { columns, rows, isOpenDialogAdd } = this.state;
+    const { columns, rows, isOpenDialogAdd, isOpenDialogEdit, selectedItem, isOpenDialogDelete } = this.state;
     return <div className="admin-booking" style={{ width: '100%' }}>
       {
-        isOpenDialogAdd && <AddUserDialog open={isOpenDialogAdd} addNewUser={this.addNewUser} />
+        isOpenDialogAdd && <AddUserDialog
+          open={isOpenDialogAdd}
+          addNewUser={this.addNewUser}
+          handleToggleDialogAdd={this.handleToggleDialogAdd}
+        />
+      }
+      {/* {
+        isOpenDialogEdit && selectedItem && <EditUserDialog
+          selectedItem={selectedItem}
+          handleToggleDialogEdit={this.handleToggleDialogEdit}
+          editUser={this.editUser}
+          open={isOpenDialogEdit}
+        />
+      } */}
+      {
+        isOpenDialogDelete && selectedItem && <DeleteUserDialog
+          selectedItem={selectedItem}
+          open={isOpenDialogDelete}
+          handleToggleDialogDelete={this.handleToggleDialogDelete}
+          deleteUser={this.deleteUser}
+        />
       }
       <Sidebar />
       <div className="main-view">
