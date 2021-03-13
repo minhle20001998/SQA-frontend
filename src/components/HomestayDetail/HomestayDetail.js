@@ -40,6 +40,7 @@ class HomestayDetail extends Component {
 
     async componentDidMount() {
         const homestay_id = this.props.match.params.id;
+        console.log(this.props)
         const urlHomestay = "https://sqa-api.herokuapp.com/homestay/getOne";
         const getHomestay = await axios.post(urlHomestay, {
             _id: homestay_id.toString()

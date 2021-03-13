@@ -86,6 +86,7 @@ class Homestay extends Component {
     }
 
     render() {
+        console.log("------123", this.props.match)
         const { isLogin, isLoginAdmin, completed } = this.state;
         return <div className="homestay" >
             <Router>

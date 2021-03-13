@@ -8,9 +8,8 @@ import { getHomeStay, addHomeStay, editHomeStay, deleteHomeStay } from '../../ut
 import AddHomestayDialog from './AddHomestayDialog';
 import EditHomestayDialog from './EditHomestayDialog';
 import DeleteHomestayDialog from './DeleteHomestayDialog';
-
-
-
+import Searchbar from '../search-bar/Searchbar';
+import { removeVietnameseTones } from "../../components/Functions/removeVietnamese";
 class Homestays extends Component {
     constructor(props) {
         super(props);
@@ -74,26 +73,48 @@ class Homestays extends Component {
                             </Button>
                         )
                     }
-                    
+
                 },
             ],
+            data: [],
             rows: [],
             currentData: null
         }
         this.handleToggleDialogAdd = this.handleToggleDialogAdd.bind(this);
-        this.getIndex = this.getIndex.bind(this);
         this.getHomeStaysList = this.getHomeStaysList.bind(this);
         this.addNewHomeStay = this.addNewHomeStay.bind(this);
         this.handleToggleDialogDelete = this.handleToggleDialogDelete.bind(this);
         this.handleToggleDialogEdit = this.handleToggleDialogEdit.bind(this);
         this.editHomeStay = this.editHomeStay.bind(this);
+        this.handleOnInput = this.handleOnInput.bind(this);
         this.deleteHomeStay = this.deleteHomeStay.bind(this);
     }
 
     async getHomeStaysList() {
         const homeStayList = await getHomeStay();
         this.setState({
-            rows: homeStayList.data.map((item) => ({ ...item, id: item._id }))
+            data: homeStayList.data.map((item) => ({ ...item, id: item._id })),
+            rows: homeStayList.data.map((item) => ({ ...item, id: item._id })),
+        })
+    }
+
+    handleOnInput(e) {
+        const { data } = this.state;
+        const input = e.target.value;
+        const filter = data.filter((homestay) => {
+            if (removeVietnameseTones((homestay.name).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+                || removeVietnameseTones((homestay._id).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+                || removeVietnameseTones((homestay.address).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+                || removeVietnameseTones((homestay.catalog_name).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+                || removeVietnameseTones((homestay.id).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+                || removeVietnameseTones((homestay.name).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+                || (homestay.price).toString().match(input)
+            ) {
+                return homestay;
+            }
+        })
+        this.setState({
+            rows: filter
         })
     }
 
@@ -117,15 +138,6 @@ class Homestays extends Component {
 
     componentDidMount() {
         this.getHomeStaysList();
-    }
-
-    getIndex(id) {
-        const { rows } = this.state;
-        for (let i = 0; i < rows.length; i++) {
-            if (rows[i].id == id) {
-                return i;
-            }
-        }
     }
 
     handleToggleDialogAdd() {
@@ -181,6 +193,7 @@ class Homestays extends Component {
                         <h4 className="welcome-header">Hi, Welcome back!</h4>
                         <h4>All Homestays</h4>
                     </div>
+                    <Searchbar placeholder="Search homestay" handleOnInput={this.handleOnInput} />
                     <div onClick={this.handleToggleDialogAdd}>
                         <i className="fas fa-plus-circle"></i>
                     </div>

@@ -8,7 +8,8 @@ import './Users.css';
 import AddUserDialog from './AddUserDialog';
 import EditUserDialog from './EditUserDialog';
 import DeleteUserDialog from './DeleteUserDialog';
-
+import { removeVietnameseTones } from "../../components/Functions/removeVietnamese";
+import Searchbar from '../search-bar/Searchbar';
 
 
 class Users extends Component {
@@ -70,19 +71,6 @@ class Users extends Component {
           width: 200,
 
         },
-        // {
-        //   field: "Edit",
-        //   width: 100,
-        //   sortable: false,
-        //   renderCell: (params) => {
-        //     const { row } = params;
-        //     return (
-        //       <Button variant="contained" color="primary" onClick={() => this.handleToggleDialogEdit(row)} >
-        //         Edit
-        //       </Button>
-        //     )
-        //   }
-        // },
         {
           field: "Delete",
           width: 100,
@@ -98,6 +86,7 @@ class Users extends Component {
 
         },
       ],
+      data: [],
       rows: [],
       currentData: null
     }
@@ -111,6 +100,25 @@ class Users extends Component {
     this.editUser = this.editUser.bind(this);
     this.handleToggleDialogDelete = this.handleToggleDialogDelete.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
+    this.handleOnInput = this.handleOnInput.bind(this);
+  }
+
+  handleOnInput(e) {
+    const { data } = this.state;
+    const input = e.target.value;
+    const filter = data.filter((user) => {
+      if (removeVietnameseTones((user.name).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+        || removeVietnameseTones((user.address).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+        || removeVietnameseTones((user.email).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+        || removeVietnameseTones((user._id).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+        || removeVietnameseTones((user.phone).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+      ) {
+        return user;
+      }
+    })
+    this.setState({
+      rows: filter
+    })
   }
 
   async getUsersList() {
@@ -119,7 +127,11 @@ class Users extends Component {
       rows: homeStayList.data.map((item) => ({
         ...item,
         id: item._id
-      }))
+      })),
+      data: homeStayList.data.map((item) => ({
+        ...item,
+        id: item._id
+      })),
     })
   }
 
@@ -225,6 +237,7 @@ class Users extends Component {
             <h4 className="welcome-header">Hi, Welcome back!</h4>
             <h4>All Users</h4>
           </div>
+          <Searchbar placeholder="Search user" handleOnInput={this.handleOnInput} />
           <div onClick={this.handleToggleDialogAdd}>
             <i className="fas fa-plus-circle"></i>
           </div>

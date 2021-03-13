@@ -11,8 +11,8 @@ import Button from '@material-ui/core/Button';
 import { getBooking, deleteBooking } from '../../utils/requestAPI/index';
 import './Booking.css';
 import DeleteBookingDialog from './DeleteBookingDialog';
-
-
+import { removeVietnameseTones } from "../../components/Functions/removeVietnamese";
+import Searchbar from '../search-bar/Searchbar';
 
 class Booking extends Component {
     constructor(props) {
@@ -83,9 +83,10 @@ class Booking extends Component {
                             </Button>
                         )
                     }
-                    
+
                 },
             ],
+            data: [],
             rows: [],
             currentData: null
         }
@@ -95,6 +96,24 @@ class Booking extends Component {
         this.getBookingList = this.getBookingList.bind(this);
         this.handleToggleDialogDelete = this.handleToggleDialogDelete.bind(this);
         this.deleteBooking = this.deleteBooking.bind(this);
+        this.handleOnInput = this.handleOnInput.bind(this);
+    }
+
+    handleOnInput(e) {
+        const { data } = this.state;
+        const input = e.target.value;
+        const filter = data.filter((booking) => {
+            if (removeVietnameseTones((booking.homestay_name).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+                || removeVietnameseTones((booking.homestay_id).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+                || removeVietnameseTones((booking.id).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+                || removeVietnameseTones((booking.user_id).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+            ) {
+                return booking;
+            }
+        })
+        this.setState({
+            rows: filter
+        })
     }
 
     async getBookingList() {
@@ -103,8 +122,10 @@ class Booking extends Component {
             rows: homeStayList.data.map((item) => ({
                 ...item,
                 id: item._id
-            }))
+            })),
+            data: homeStayList.data.map((item) => ({ ...item, id: item._id })),
         })
+
     }
 
     async deleteBooking(data) {
@@ -151,7 +172,7 @@ class Booking extends Component {
     render() {
         const { dialogOpen, columns, rows, currentData, isOpenDialogDelete, selectedItem } = this.state;
         return <div className="admin-booking" style={{ width: '100%' }}>
-             {
+            {
                 isOpenDialogDelete && selectedItem && <DeleteBookingDialog
                     open={isOpenDialogDelete}
                     handleToggleDialogDelete={this.handleToggleDialogDelete}
@@ -167,9 +188,9 @@ class Booking extends Component {
                         <h4 className="welcome-header">Hi, Welcome back!</h4>
                         <h4>All Booking</h4>
                     </div>
-                    {/* <div>
-                        <i className="fas fa-plus-circle"></i>
-                    </div> */}
+                    <Searchbar placeholder="Search booking" handleOnInput={this.handleOnInput} />
+                    <div style={{ width: "37px" }}>
+                    </div>
                 </header>
                 <section id="booking-statistic">
                     <DataGrid className="datagrid" sortingOrder={['desc', 'asc', null]}
