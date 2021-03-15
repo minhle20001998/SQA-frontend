@@ -16,6 +16,7 @@ import Register from './components/Register/Register'
 import UserHistory from './components/UserHistory/UserHistory'
 import ProtectedAdminRoute from './admin-components/ProtectedAdminRoute'
 import AdminLogin from './admin-components/login/AdminLogin'
+import Posts from './admin-components/posts/Posts'
 import './Homestay.css'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Users from './admin-components/users/Users';
@@ -139,6 +140,9 @@ class Homestay extends Component {
                     </ProtectedAdminRoute>
                     <ProtectedAdminRoute isLogin={isLoginAdmin} exact path="/admin/users">
                         <Users />
+                    </ProtectedAdminRoute>
+                    <ProtectedAdminRoute isLogin={isLoginAdmin} exact path="/admin/posts">
+                        <Posts />
                     </ProtectedAdminRoute>
                 </Switch>
             </Router>

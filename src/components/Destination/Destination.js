@@ -7,6 +7,7 @@ import ScrollUpButton from "react-scroll-up-button";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
 import './Destination.css';
 import { Helmet } from "react-helmet";
+import AutoSuggest from '../AutoSuggest/AutoSuggest'
 class Destination extends Component {
 
     constructor(props) {
@@ -20,6 +21,7 @@ class Destination extends Component {
         this.setLocation = this.setLocation.bind(this);
         this.handleLocationChange = this.handleLocationChange.bind(this);
         this.searchCategory = this.searchCategory.bind(this);
+        this.handleSearchByID = this.handleSearchByID.bind(this);
     }
 
     async componentDidMount() {
@@ -47,6 +49,15 @@ class Destination extends Component {
     setLocation(location) {
         this.setState({
             location: location
+        })
+    }
+
+    handleSearchByID(id) {
+        const arr = []
+        const found = this.state.homestays.find(element => element._id === id);
+        arr.push(found);
+        this.setState({
+            showList: arr
         })
     }
 
@@ -94,7 +105,7 @@ class Destination extends Component {
 
 
     render() {
-        const { showList, location } = this.state;
+        const { homestays, showList, location } = this.state;
         const { logo, history, isLogin } = this.props;
         return <div className="destination">
             <Helmet>
@@ -103,19 +114,22 @@ class Destination extends Component {
             <ScrollToTop />
             <ScrollUpButton />
             <Navbar current="destination" logo={logo} isLogin={isLogin} />
-            <Slideshow >
+            <div className="slide-show">
                 <div className="main-content">
                     <div className="meta-text">
                         <h2>Where do you want to go?</h2>
                     </div>
                     <div className="search row">
-                        <form className="search-form" name="" method="" action="">
+                        <AutoSuggest handleSearchByID={this.handleSearchByID} data={homestays} />
+                        {/* <form className="search-form" name="" method="" action="">
                             <input type="text" className="searchText" placeholder="Select Place" />
-                        </form>
+                        </form> */}
                         <button><i className="fa fa-search icon-search" aria-hidden="true"></i></button>
                     </div>
                 </div>
-            </Slideshow>
+                <Slideshow >
+                </Slideshow>
+            </div>
             {showList ? <section className="detail-parts grid-system">
                 <div className="container">
                     <div className="row">
@@ -157,7 +171,7 @@ class Destination extends Component {
                                 <div className="image-place">
                                     <div className="row">
                                         {showList.map((homestay, index) => {
-                                            return <div className="col-lg-4" key={index}>
+                                            return <div className="col-lg-4 destinations-div" key={index}>
                                                 <a href={`/homestay/${homestay._id}`}><img src={homestay.image_link[0]} /></a>
                                             </div>
                                         })}

@@ -40,7 +40,7 @@ class Sidebar extends Component {
             </div>
             <div className="admin-info">
                 <p className="admin-name">{username}</p>
-                <p className="position" style={{color:"#aeffc1"}}>Manager</p>
+                <p className="position" style={{ color: "#aeffc1" }}>Manager</p>
             </div>
             <div className="main-components ">
                 <p className="header-text"> --main</p>
@@ -59,6 +59,10 @@ class Sidebar extends Component {
                 <Link className={"homestays-components" + (currentSelected === "/admin/users" ? " selected" : "")} to="/admin/users">
                     <i className="fas fa-user-friends"></i>
                     <p className="title">Users</p>
+                </Link>
+                <Link className={"homestays-components" + (currentSelected === "/admin/posts" ? " selected" : "")} to="/admin/posts">
+                    <i className="fas fa-user-friends"></i>
+                    <p className="title">Posts</p>
                 </Link>
             </div>
         </div>

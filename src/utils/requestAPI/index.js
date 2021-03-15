@@ -22,7 +22,7 @@ export const addHomeStay = async (data) => {
 }
 
 export const editHomeStay = async (data) => {
-    const { id, ...rest} = data;
+    const { id, ...rest } = data;
     const url = `https://sqa-api.herokuapp.com/homestay/${id}`;
     const response = await requestAPI(url, {
         method: 'put',
@@ -49,7 +49,7 @@ export const getBooking = async () => {
 export const getUsers = async () => {
     const url = 'https://sqa-api.herokuapp.com/user';
     const response = await requestAPI(url);
-    return response  
+    return response
 }
 
 export const addUser = async (data) => {
@@ -59,10 +59,10 @@ export const addUser = async (data) => {
         data: data
     });
     return response;
-} 
+}
 
 export const editUser = async (data) => {
-    const { id, ...rest} = data;
+    const { id, ...rest } = data;
     const url = `https://sqa-api.herokuapp.com/user/${data.id}`;
     const response = await requestAPI(url, {
         method: 'put',
@@ -82,6 +82,42 @@ export const deleteUser = async (data) => {
 
 export const deleteBooking = async (data) => {
     const url = 'https://sqa-api.herokuapp.com/transaction';
+    const response = await requestAPI(url, {
+        method: 'delete',
+        data: data
+    });
+    return response;
+}
+
+export const getPosts = async () => {
+    const url = 'https://sqa-api.herokuapp.com/broad';
+    const response = await requestAPI(url, {
+        method: 'get',
+    })
+    return response;
+}
+
+export const postPosts = async (data) => {
+    const url = 'https://sqa-api.herokuapp.com/broad';
+    const response = await requestAPI(url, {
+        method: 'post',
+        data: data
+    })
+    return response;
+}
+
+export const putPosts = async (data) => {
+    const { id, ...rest } = data;
+    const url = `https://sqa-api.herokuapp.com/broad/${data.id}`;
+    const response = await requestAPI(url, {
+        method: 'put',
+        data: rest
+    })
+    return response;
+}
+
+export const deletePosts = async (data) => {
+    const url = 'https://sqa-api.herokuapp.com/broad';
     const response = await requestAPI(url, {
         method: 'delete',
         data: data

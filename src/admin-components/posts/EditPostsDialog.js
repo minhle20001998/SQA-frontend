@@ -13,14 +13,11 @@ class EditHomestayDialog extends Component {
         console.log('props', props)
         this.state = {
             form: {
-                name: props.selectedItem && props.selectedItem.name || '',
-                catalog_name: props.selectedItem && props.selectedItem.catalog_name || '',
-                price: props.selectedItem && props.selectedItem.price || 0,
+                id: props.selectedItem && props.selectedItem._id || '',
+                title: props.selectedItem && props.selectedItem.title || '',
+                content: props.selectedItem && props.selectedItem.content || '',
+                image_link: props.selectedItem && props.selectedItem.image_link || 0,
                 address: props.selectedItem && props.selectedItem.address || '',
-                description: props.selectedItem && props.selectedItem.description || '',
-                // roomtype: props.selectedItem && props.selectedItem.description || [],
-                image_link: props.selectedItem && props.selectedItem.image_link || [],
-                id: props.selectedItem && props.selectedItem.id || "",
             }
         };
         this.handleChangeInput = this.handleChangeInput.bind(this);
@@ -39,52 +36,50 @@ class EditHomestayDialog extends Component {
     }
 
     handleEdit() {
-        const { editHomeStay } = this.props;
-        const { price, ...rest } = this.state.form;
-        editHomeStay({
-            ...rest,
-            price: parseFloat(price)
+        const { editPost } = this.props;
+        const { form } = this.state;
+        editPost({
+            id: form.id,
+            title: form.title,
+            content: form.content,
+            image_link: form.image_link,
+            address: form.address
         })
     }
 
     render() {
         const { open, handleToggleDialogEdit, selectedItem } = this.props;
         const { form } = this.state;
-        // console.log('selectedItem', selectedItem)
+
+        console.log('selectedItem', selectedItem)
         return (
             <Dialog open={open} >
-                <DialogTitle id="form-dialog-title">Add New Homestay</DialogTitle>
+                <DialogTitle id="form-dialog-title">Edit Post</DialogTitle>
                 <DialogContent>
                     <div>
                         <DialogContentText>
-                            Catalog Name
+                            Title
                         </DialogContentText>
-                        <input value={form.catalog_name} name="catalog_name" type="text" onChange={this.handleChangeInput} />
+                        <input defaultValue={selectedItem.title} name="title" type="text" onChange={this.handleChangeInput} />
                     </div>
                     <div>
                         <DialogContentText>
-                            Name
+                            Content
                         </DialogContentText>
-                        <input value={form.name} type="text" name="name" onChange={this.handleChangeInput} />
+                        <input defaultValue={selectedItem.content} type="text" name="content" onChange={this.handleChangeInput} />
                     </div>
                     <div>
                         <DialogContentText>
-                            Price
+                            Image Link
                         </DialogContentText>
-                        <input value={form.price} type="number" name="price" onChange={this.handleChangeInput} />
+                        <input defaultValue={selectedItem.image_link} type="text" name="image_link" onChange={this.handleChangeInput} />
                     </div>
 
                     <div>
                         <DialogContentText>
                             Address
                         </DialogContentText>
-                        <input value={form.address} type="text" name="address" onChange={this.handleChangeInput} />
-                    </div>
-                    <div className="full-size">
-                        <DialogContentText>
-                            Description
-                        </DialogContentText>
-                        <textarea value={form.description} name="description" onChange={this.handleChangeInput} ></textarea>
+                        <input defaultValue={selectedItem.address} type="text" name="address" onChange={this.handleChangeInput} />
                     </div>
                     <DialogActions>
                         <button className="action-btn" id="save-btn" onClick={this.handleEdit}>Save</button>
