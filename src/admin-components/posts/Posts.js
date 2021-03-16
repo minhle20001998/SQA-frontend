@@ -7,6 +7,7 @@ import Sidebar from '../sidebar/Sidebar'
 import AddPostsDialog from './AddPostsDialog'
 import DeletePostsDialong from './DeletePostsDialog'
 import Searchbar from '../search-bar/Searchbar';
+import { removeVietnameseTones } from "../../components/Functions/removeVietnamese";
 import EditPostsDialog from './EditPostsDialog';
 class Posts extends Component {
     constructor(props) {
@@ -108,7 +109,26 @@ class Posts extends Component {
         this.editPost = this.editPost.bind(this);
         this.handleToggleDialogDelete = this.handleToggleDialogDelete.bind(this);
         this.deletePost = this.deletePost.bind(this);
-        // this.handleOnInput = this.handleOnInput.bind(this);
+        this.handleOnInput = this.handleOnInput.bind(this);
+    }
+
+    handleOnInput(e) {
+        const { data } = this.state;
+        const input = e.target.value;
+        const filter = data.filter((post) => {
+            if (
+                removeVietnameseTones((post._id).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+                || removeVietnameseTones((post.address).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+                || removeVietnameseTones((post.content).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+                || removeVietnameseTones((post.id).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+                || removeVietnameseTones((post.title).toLowerCase()).match(removeVietnameseTones(input.toLowerCase()))
+            ) {
+                return post;
+            }
+        })
+        this.setState({
+            rows: filter
+        })
     }
 
     async getPostList() {
@@ -144,6 +164,8 @@ class Posts extends Component {
             selectedItem: row ? row : null
         }))
     }
+
+
 
     componentDidMount() {
         this.getPostList();
@@ -202,7 +224,7 @@ class Posts extends Component {
                         <h4 className="welcome-header">Hi, Welcome back!</h4>
                         <h4>All Users</h4>
                     </div>
-                    <Searchbar placeholder="Search user" handleOnInput={this.handleOnInput} />
+                    <Searchbar placeholder="Search posts" handleOnInput={this.handleOnInput} />
                     <div onClick={this.handleToggleDialogAdd}>
                         <i className="fas fa-plus-circle"></i>
                     </div>

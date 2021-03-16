@@ -71,7 +71,6 @@ class AutoSuggest extends Component {
                     setTimeout(function () {
                         div.scrollIntoView();
                     }, 50);
-
                 }}
             />}
         </div>
