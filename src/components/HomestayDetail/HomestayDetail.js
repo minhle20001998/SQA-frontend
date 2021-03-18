@@ -111,10 +111,13 @@ class HomestayDetail extends Component {
     }
 
     handleEditOnClick(e) {
-        this.setState({
-            dialogOpen: true,
-        });
-
+        if (this.props.isLogin) {
+            this.setState({
+                dialogOpen: true,
+            });
+        } else {
+            this.props.history.push('/login');
+        }
     }
 
     handleEditClose() {
@@ -124,6 +127,7 @@ class HomestayDetail extends Component {
     }
 
     async handleTransaction() {
+
         const { user, homestay } = this.state;
         const transaction_url = "https://sqa-api.herokuapp.com/transaction"
         const amount = parseInt(document.querySelector('#amount').value);
@@ -141,6 +145,7 @@ class HomestayDetail extends Component {
                 err: "Please enter homestay amount"
             })
         }
+
     }
 
     render() {
@@ -151,7 +156,7 @@ class HomestayDetail extends Component {
                 <title>Detail</title>
             </Helmet>
             {(homestay && reviews) ? <Dialog open={dialogOpen} onClose={this.handleEditClose} id="bill" >
-                <DialogTitle id="form-dialog-title">Edit Homestays</DialogTitle>
+                <DialogTitle id="form-dialog-title">Booking Homestays</DialogTitle>
                 <p style={{ color: "red", textAlign: "center" }}>{err}</p>
                 <DialogContent id="bill-form">
                     <div>
