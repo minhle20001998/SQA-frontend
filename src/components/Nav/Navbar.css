@@ -54,7 +54,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 60px 0 0;
+  padding: 0 150px 0 0;
 }
 
 .client-navbar .links a {
@@ -116,6 +116,8 @@
   .client-navbar .links a {
     font-size: 20px;
   }
+
+ 
 }
 
 @media only screen and (max-width: 1090px) {
@@ -128,6 +130,7 @@
     align-items: center;
     flex-direction: column !important;
     position: relative;
+    padding-left: 0px;
   }
   .client-navbar .links a {
     font-size: 24px;
@@ -142,6 +145,12 @@
     justify-content: center !important;
     align-items: center !important;
   }
+
+  .client-navbar .user-area a{
+    color: #faa800;
+    font-size: 24px;
+  }
+
   .client-navbar .links ul {
     width: 100%;
     display: flex;
@@ -160,9 +169,14 @@
   }
   .client-navbar .user-area {
     position: absolute;
-    right: 10px;
-    top: 30px;
+    right: 20px;
+    top: 10px;
     padding: 0 0;
+  }
+
+  .triangle-after,
+  .triangle-before {
+    border: none;
   }
 }
 
