@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital@1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Secular+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 :root {
   --beige-color: #efc399;
   --shadow: 5px 5px 5px rgb(202, 202, 202);
@@ -78,67 +79,71 @@ section {
 }
 
 .popular-homestays {
-  padding: 40px 70px 0px 70px;
+  padding: 10px 70px 0px 70px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border-bottom: 1px solid #bdbdbd;
 }
+
 .popular-homestays-body {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
 }
 /* PROTOTYPE !!! , WILL BE CHANGE WHEN CONNECT WITH SERVER */
 .popular-homestays-body > a {
-  width: 250px;
+  width: 270px;
   text-decoration: none;
-  margin: 0 10px;
+  margin: 0 40px;
+  box-shadow: 0 0 10px rgb(181, 200, 212);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 25px;
 }
 
 .popular-homestays-body > a > .thumbnail {
-  width: 250px;
+  width: 100%;
   height: 250px;
   background: var(--beige-color);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  box-shadow: var(--shadow);
   margin: 0 10px 20px 0px;
 }
 .popular-homestays-body > a > p {
-  width: 250px;
-  font-family: "Lato";
+  width: 100%;
   font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
+  text-align: center;
   line-height: 23px;
-  color: #363636;
   text-shadow: var(--shadow);
   margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
 }
 
 .homestay-address,
 .homestay-price {
+  color: rgb(97, 97, 97);
+  font-size: 14px;
+  font-weight: 600;
   text-align: start;
 }
 
 .homestay-name {
   font-size: 18px !important;
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: #6765a2;
 }
 
 .main-heading {
   text-align: center;
-  font-family: "Playfair Display", serif;
-  font-style: italic;
-  font-size: 50px;
-  color: #4f4f4f;
-  text-shadow: var(--shadow);
+  font-family: "Lato";
+  font-size: 34px;
+  color: #e99f0a;
+  text-shadow: 1px 0 5px rgb(197, 197, 197);
   font-weight: normal;
-  padding: 50px 0;
+  padding: 30px 0 50px 0;
 }
 
 .popular-homestays-footer {
@@ -165,24 +170,25 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 40px 70px 0px 70px;
-  border-bottom: 1px solid #bdbdbd;
+  padding: 80px 70px 0px 70px;
 }
 
 .popular-trips-body {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
 .popular-trips-body .travel-card {
   display: flex;
   flex-direction: column;
-  margin: 0 20px 50px 20px;
-  width: 45%;
-  max-width: 700px;
-  min-width: 300px;
+  align-items: center;
+  margin: 0 10px 50px 10px;
+  padding: 50px 30px;
+  width: 330px;
+  background-color: #eeeeee;
+  border-radius: 10px;
 }
 
 .popular-trips-body .travel-card .top-div {
@@ -195,11 +201,25 @@ section {
   width: 80px;
   height: 80px;
   background: #4f4f4f;
-  margin-right: 20px;
   border-radius: 100%;
+  margin-bottom: 20px;
   background-size: cover;
   border: 2px solid rgb(109, 109, 109);
 }
+
+.trip-title {
+  font-weight: bold;
+  color: #6765a2;
+  font-size: 20px;
+  text-align: center;
+}
+
+.trip-content {
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .popular-trips-body .travel-card .popular-trips-comment {
   padding-left: 10px;
   width: 80%;
@@ -268,6 +288,112 @@ section {
   text-shadow: 2px 2px 5px black;
   color: white;
 }
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-center hr {
+  border-top: 1px solid rgb(0 0 0 / 14%);
+}
+
+.book-now-div {
+  background-image: linear-gradient(#fafafa, #fafafa00),
+    url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/man-standing-on-a-mountain-with-white-background-alexandr-berdicevschi.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 60px;
+}
+
+.horizontal-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.horizontal-bar hr {
+  width: 60%;
+  height: 2px;
+  background: #ebc374;
+}
+
+.book-now-div p {
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.book-now-div button {
+  background-image: linear-gradient(45deg, #fd6a00, #c1ff04);
+  box-shadow: 0 0 5px rgb(211, 211, 211);
+  border: none;
+  height: 40px;
+  border-radius: 30px;
+  width: 140px;
+  font-size: 18px;
+  color: rgb(39, 39, 39);
+}
+
+.sub-heading {
+  text-align: center;
+  color: #e99f0a;
+  margin-bottom: 0;
+  font-size: 25px;
+  font-family: "Lato";
+  text-shadow: 1px 0 5px rgb(197, 197, 197);
+}
+
+.popular-tourism {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.tourism-card {
+  width: 230px;
+  height: 350px;
+  margin: 0 20px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: var(--shadow);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.tour-title {
+  font-size: 22px;
+  color: white;
+  margin-bottom: 0;
+}
+
+.tourism-card a {
+  text-decoration: none;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  background-image: linear-gradient(45deg, #fd6a00, #c1ff04);
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tourism-card a i {
+  font-size: 15px;
+  color: white;
+}
+
 @media only screen and (max-width: 1211px) {
   .popular-homestays-body {
     flex-wrap: wrap;
@@ -280,10 +406,12 @@ section {
 
 @media only screen and (max-width: 1181px) {
   .popular-homestays-body {
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
   .popular-homestays-body > a {
-    margin: 0px 100px 0 100px;
+    margin: 0px 100px 50px 100px;
   }
   .main-heading {
     font-size: 40px;

@@ -47,6 +47,8 @@ class Navbar extends Component {
         const { isLogin, logo, current } = this.props;
         return <div className="nav-bar">
             <nav className="client-navbar">
+                <div className="triangle-before">
+                </div>
                 <Link className="homestay-logo" to="/">
                     <img src={logo} alt="logo" className="logo" />
                 </Link>
@@ -68,9 +70,8 @@ class Navbar extends Component {
                     }}><i className="fas fa-sign-out-alt"></i></abbr>
                 </div> : <div className="user-area">
                     <Link to="/login">Login</Link>
-                    <span>|</span>
-                    <Link to="/register">Register</Link>
                 </div>}
+                <div className="triangle-after"></div>
             </nav>
         </div>
     }
